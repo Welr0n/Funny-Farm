@@ -1,6 +1,7 @@
 public class Chicken extends Animals {
     private String name;
     private float weight;
+    private String meat = "Chicken";
 
     public Chicken(String name, float weight) {
         this.name = name;
@@ -23,6 +24,10 @@ public class Chicken extends Animals {
         this.name = name;
     }
 
+    public String getMeat() {
+        return meat;
+    }
+
     @Override
     public void eat() {
         System.out.println(getClass().getName() + " " + getName() + " eating");
@@ -33,5 +38,16 @@ public class Chicken extends Animals {
     public void poop() {
         setWeight(getWeight() - 0.2f);
         System.out.println(getClass().getName() + " " + getName() + " pooped");
+    }
+
+    @Override
+    public boolean readyForSlaughter() {
+        if (getWeight() >= 5) {
+            System.out.println("Chicken is in the good condition for slaughtering!");
+            return true;
+        } else {
+            System.out.println("Let the chicken grow.");
+            return false;
+        }
     }
 }

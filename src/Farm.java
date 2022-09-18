@@ -33,6 +33,7 @@ public class Farm {
 
     public void feedAnimals() {
         System.out.println("Time to feed the animals:");
+
         for (Animals animal:
                 listAnimals) {
             animal.eat();
@@ -41,6 +42,7 @@ public class Farm {
 
     public void pasture() {
         System.out.println("Animals on pasture:");
+
         for (Animals animal:
                 listAnimals) {
             animal.poop();
@@ -54,27 +56,8 @@ public class Farm {
              listAnimals) {
             System.out.println("Weighting the " + animal.getName() + "." + " The " + animal.getName() + " weighs " + animal.getWeight() + " kg");
 
-            if (animal instanceof Cow) {
-                if (animal.getWeight() >= 300) {
-                    System.out.println("Cow is in the good condition for slaughtering!");
-                    listSlaughter.add(animal);
-                } else {
-                    System.out.println("Let the cow grow.");
-                }
-            } else if (animal instanceof Pig) {
-                if (animal.getWeight() >= 100) {
-                    System.out.println("Pig is in the good condition for slaughtering!");
-                    listSlaughter.add(animal);
-                } else {
-                    System.out.println("Let the pig grow.");
-                }
-            } else if (animal instanceof Chicken) {
-                if (animal.getWeight() >= 5) {
-                    System.out.println("Chicken is in the good condition for slaughtering!");
-                    listSlaughter.add(animal);
-                } else {
-                    System.out.println("Let the chicken grow.");
-                }
+            if (animal.readyForSlaughter()) {
+                listSlaughter.add(animal);
             }
         }
 
@@ -89,16 +72,8 @@ public class Farm {
     }
 
     public void slaughter(Animals animal) {
-        String meat = "";
+        String meat = animal.getMeat();
         float curMeat = animal.getWeight();
-
-        if (animal instanceof Cow) {
-            meat = "Beef";
-        } else if (animal instanceof Pig) {
-            meat = "Pork";
-        } else if (animal instanceof Chicken) {
-            meat = "Chicken";
-        }
 
         if (!getMeatWeight().isEmpty()) {
             if (meatWeight.containsKey(meat)) {
